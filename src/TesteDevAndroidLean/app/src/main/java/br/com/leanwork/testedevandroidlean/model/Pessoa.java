@@ -9,14 +9,14 @@ public class Pessoa {
     private long idPessoaCadastrada;
     private final String nome, genero, dataNascimento, telefone;
 
-    Pessoa(String nome, String genero, String dataNascimento, String telefone) {
+    public Pessoa(String nome, String genero, String dataNascimento, String telefone) {
         this.nome = nome;
         this.genero = genero;
         this.dataNascimento = dataNascimento;
         this.telefone = telefone;
     }
 
-    Pessoa(long idPessoaCadastrada, String nome, String genero, String dataNascimento, String telefone) {
+    public Pessoa(long idPessoaCadastrada, String nome, String genero, String dataNascimento, String telefone) {
         this.idPessoaCadastrada = idPessoaCadastrada;
         this.nome = nome;
         this.genero = genero;
