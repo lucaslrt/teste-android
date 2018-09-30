@@ -12,26 +12,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.leanwork.testedevandroidlean.R;
+import br.com.leanwork.testedevandroidlean.dao.PessoaDAO;
 import br.com.leanwork.testedevandroidlean.model.Pessoa;
 
-public class PessoasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PessoasAdapter extends RecyclerView.Adapter<PessoasAdapter.PessoaHolder> {
 
-    private final LayoutInflater layoutInflater;
-    private List<Pessoa> pessoasList = new ArrayList<>();
+    private List<Pessoa> pessoasList;
 
-    PessoasAdapter(Context context) {
-        layoutInflater = LayoutInflater.from(context);
+    public PessoasAdapter(Context context) {
+        PessoaDAO pessoaDAO = new PessoaDAO(context);
+
+        pessoasList = pessoaDAO.getPessoas();
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PessoaHolder(layoutInflater.inflate(R.layout.item_view_pessoa, viewGroup, false));
+    public PessoasAdapter.PessoaHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_view_pessoa, viewGroup, false);
+        return new PessoaHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull PessoasAdapter.PessoaHolder viewHolder, int position) {
         Pessoa pessoa = pessoasList.get(position);
+        viewHolder.tvNomePessoa.setText(pessoa.getNome());
+        viewHolder.tvGeneroPessoa.setText(pessoa.getGenero());
+        viewHolder.tvDataNascPessoa.setText(pessoa.getDataNascimento());
+        viewHolder.tvTelefonePessoa.setText(pessoa.getTelefone());
     }
 
     @Override
@@ -45,7 +53,7 @@ public class PessoasAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
 
-    public static class PessoaHolder extends RecyclerView.ViewHolder {
+    static class PessoaHolder extends RecyclerView.ViewHolder {
 
         private TextView tvNomePessoa, tvGeneroPessoa, tvTelefonePessoa, tvDataNascPessoa;
 

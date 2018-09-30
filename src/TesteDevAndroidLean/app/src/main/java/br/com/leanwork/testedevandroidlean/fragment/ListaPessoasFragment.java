@@ -36,6 +36,8 @@ public class ListaPessoasFragment extends Fragment {
         rvListaPessoas = view.findViewById(R.id.rvListaPessoas);
         rvListaPessoas.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvListaPessoas.setHasFixedSize(true);
+        pessoasAdapter = new PessoasAdapter(getContext());
+        rvListaPessoas.setAdapter(pessoasAdapter);
     }
 
     @Override

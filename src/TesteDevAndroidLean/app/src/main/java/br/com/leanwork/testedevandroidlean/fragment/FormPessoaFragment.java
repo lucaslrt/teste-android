@@ -43,7 +43,6 @@ public class FormPessoaFragment extends Fragment {
     private TextInputEditText etTelefone;
     private static TextInputEditText etDataNascimento;
     private Spinner spnGenero;
-    private MaterialButton mbtFinalizarCadastro;
     private String nome;
     private String genero;
     private String telefone;
@@ -71,15 +70,10 @@ public class FormPessoaFragment extends Fragment {
         etTelefone = view.findViewById(R.id.etTelefoneCelular);
         etDataNascimento = view.findViewById(R.id.etDataNascimento);
         spnGenero = view.findViewById(R.id.spnGenero);
-        mbtFinalizarCadastro = view.findViewById(R.id.btFinalizarCadastroPessoa);
+        MaterialButton mbtFinalizarCadastro = view.findViewById(R.id.btFinalizarCadastroPessoa);
 
         // adicionando itens para o spinner
-        String[] listaGeneros = new String[]{
-                "Masculino", "Feminino", "Outro"
-        };
-        ArrayAdapter spinnerAdapter = new ArrayAdapter(getActivity(), simple_spinner_dropdown_item, listaGeneros);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnGenero.setAdapter(spinnerAdapter);
+        adicionarGeneros();
 
         // quando o campo de data for selecionado
         etDataNascimento.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +101,7 @@ public class FormPessoaFragment extends Fragment {
                     cadastroRealizadoComSucesso(pessoaDAO.setPessoa(novaPessoa));
                 }
                 else {
-                    Toast.makeText(getActivity(), "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Por favor, preencha os campos de nome e telefone.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -117,6 +111,16 @@ public class FormPessoaFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+    }
+
+    private void adicionarGeneros(){
+        // adicionando itens para o spinner
+        String[] listaGeneros = new String[]{
+                "Masculino", "Feminino", "Outro"
+        };
+        ArrayAdapter spinnerAdapter = new ArrayAdapter(getActivity(), simple_spinner_dropdown_item, listaGeneros);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnGenero.setAdapter(spinnerAdapter);
     }
 
     private void cadastroRealizadoComSucesso(Long idNovaPessoa) {
