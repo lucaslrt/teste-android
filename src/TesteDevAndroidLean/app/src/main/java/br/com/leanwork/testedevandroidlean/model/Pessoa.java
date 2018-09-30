@@ -1,6 +1,8 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.model;
 
 import android.provider.BaseColumns;
+
+import br.com.leanwork.testedevandroidlean.R;
 
 public class Pessoa {
 

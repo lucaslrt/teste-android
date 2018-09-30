@@ -1,16 +1,23 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import br.com.leanwork.testedevandroidlean.CepResponse;
+import br.com.leanwork.testedevandroidlean.util.FormUtil;
+import br.com.leanwork.testedevandroidlean.PushCadastro;
+import br.com.leanwork.testedevandroidlean.R;
+
 public class FormEnderecoFragment extends Fragment {
+    private final String TAG = FormEnderecoFragment.class.getSimpleName();
 
     private TextInputEditText etCep, etEndereco, etCidade, etBairro, etEstado;
     private String cep, endereco, bairro, cidade, estado;
@@ -30,6 +37,8 @@ public class FormEnderecoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Log.d(TAG,"onViewCreated -> On method.");
 
         etCep = view.findViewById(R.id.etCep);
         etEndereco = view.findViewById(R.id.etLogradouro);

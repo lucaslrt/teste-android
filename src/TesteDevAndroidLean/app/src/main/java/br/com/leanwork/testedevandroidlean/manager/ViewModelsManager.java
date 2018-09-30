@@ -1,9 +1,11 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.manager;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.support.annotation.NonNull;
+
+import br.com.leanwork.testedevandroidlean.BancoSQLiteHelper;
 
 public class ViewModelsManager extends ViewModelProvider.NewInstanceFactory {
 

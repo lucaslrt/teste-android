@@ -1,8 +1,9 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.manager;
 
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import br.com.leanwork.testedevandroidlean.ApiCep;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

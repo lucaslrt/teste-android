@@ -1,4 +1,4 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.model;
 
 import android.provider.BaseColumns;
 

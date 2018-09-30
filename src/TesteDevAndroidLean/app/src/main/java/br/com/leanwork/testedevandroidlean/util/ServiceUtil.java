@@ -1,4 +1,4 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.util;
 
 import android.content.Context;
 import android.view.View;

@@ -1,4 +1,4 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,29 +10,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ListaEnderecosFragment extends Fragment {
+import br.com.leanwork.testedevandroidlean.adapter.PessoasAdapter;
+import br.com.leanwork.testedevandroidlean.R;
 
-    private EnderecosAdapter enderecosAdapter;
-    private RecyclerView rvListaEnderecos;
+public class ListaPessoasFragment extends Fragment {
 
-    public static ListaEnderecosFragment newInstance() {
+    private PessoasAdapter pessoasAdapter;
+    private RecyclerView rvListaPessoas;
+
+    public static ListaPessoasFragment newInstance() {
         Bundle args = new Bundle();
-        ListaEnderecosFragment fragment = new ListaEnderecosFragment();
+        ListaPessoasFragment fragment = new ListaPessoasFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_lista_enderecos, container, false);
+        return inflater.inflate(R.layout.fragment_lista_pessoas, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvListaEnderecos = view.findViewById(R.id.rvListaEnderecos);
-        rvListaEnderecos.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvListaEnderecos.setHasFixedSize(true);
+        rvListaPessoas = view.findViewById(R.id.rvListaPessoas);
+        rvListaPessoas.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvListaPessoas.setHasFixedSize(true);
     }
 
     @Override

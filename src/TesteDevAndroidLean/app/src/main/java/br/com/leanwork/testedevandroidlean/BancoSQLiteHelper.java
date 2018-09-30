@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import br.com.leanwork.testedevandroidlean.model.Endereco;
+import br.com.leanwork.testedevandroidlean.model.Pessoa;
+
 public class BancoSQLiteHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -19,7 +22,7 @@ public class BancoSQLiteHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ADRESSES_TABLE =
             "DROP TABLE IF EXISTS " + Endereco.EnderecoDBEntry.TABLE_NAME;
 
-    BancoSQLiteHelper(Context context) {
+    public BancoSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

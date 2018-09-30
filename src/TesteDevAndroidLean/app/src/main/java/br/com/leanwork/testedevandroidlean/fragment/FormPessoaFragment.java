@@ -1,4 +1,4 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,13 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import br.com.leanwork.testedevandroidlean.util.FormUtil;
+import br.com.leanwork.testedevandroidlean.PushCadastro;
+import br.com.leanwork.testedevandroidlean.R;
+import br.com.leanwork.testedevandroidlean.util.ServiceUtil;
+
 public class FormPessoaFragment extends Fragment {
+    private final String TAG = FormPessoaFragment.class.getSimpleName();
 
     private TextInputEditText etNomeCompleto, etTelefone, etDataNascimento;
     private Spinner spnGenero;
@@ -38,6 +45,9 @@ public class FormPessoaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Log.d(TAG,"onViewCreated -> On method.");
+
         etNomeCompleto = view.findViewById(R.id.etNomeCompleto);
         etTelefone = view.findViewById(R.id.etTelefoneCelular);
         etDataNascimento = view.findViewById(R.id.etDataNascimento);

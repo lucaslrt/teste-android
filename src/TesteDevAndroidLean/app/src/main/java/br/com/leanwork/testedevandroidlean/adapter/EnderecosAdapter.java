@@ -1,4 +1,4 @@
-package br.com.leanwork.testedevandroidlean;
+package br.com.leanwork.testedevandroidlean.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.com.leanwork.testedevandroidlean.R;
+import br.com.leanwork.testedevandroidlean.model.Endereco;
 
 public class EnderecosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
