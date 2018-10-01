@@ -7,7 +7,7 @@ public class Endereco {
     private long idEnderecoCadastrado;
     private final String cep, endereco, bairro, cidade, estado;
 
-    Endereco(String cep, String endereco, String bairro, String cidade, String estado) {
+    public Endereco(String cep, String endereco, String bairro, String cidade, String estado) {
         this.cep = cep;
         this.endereco = endereco;
         this.bairro = bairro;
@@ -15,7 +15,7 @@ public class Endereco {
         this.estado = estado;
     }
 
-    Endereco(long idEnderecoCadastrado, String cep, String endereco, String bairro, String cidade, String estado) {
+    public Endereco(long idEnderecoCadastrado, String cep, String endereco, String bairro, String cidade, String estado) {
         this.idEnderecoCadastrado = idEnderecoCadastrado;
         this.cep = cep;
         this.endereco = endereco;

@@ -12,26 +12,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.leanwork.testedevandroidlean.R;
+import br.com.leanwork.testedevandroidlean.dao.EnderecoDAO;
 import br.com.leanwork.testedevandroidlean.model.Endereco;
 
-public class EnderecosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class EnderecosAdapter extends RecyclerView.Adapter<EnderecosAdapter.EnderecoHolder> {
 
     private final LayoutInflater layoutInflater;
     private List<Endereco> enderecoList = new ArrayList<>();
 
-    EnderecosAdapter(Context context) {
+    public EnderecosAdapter(Context context) {
+
         layoutInflater = LayoutInflater.from(context);
+        EnderecoDAO enderecoDAO = new EnderecoDAO(context);
+        enderecoList = enderecoDAO.getEnderecos();
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public EnderecosAdapter.EnderecoHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new EnderecoHolder(layoutInflater.inflate(R.layout.item_view_endereco_modelo_1, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull EnderecosAdapter.EnderecoHolder viewHolder, int position) {
         Endereco endereco = enderecoList.get(position);
+        viewHolder.tvCep.setText(endereco.getCep());
+        viewHolder.tvEndereco.setText(endereco.getEndereco());
+        viewHolder.tvBairro.setText(endereco.getBairro());
+        viewHolder.tvCidade.setText(endereco.getCidade());
+        viewHolder.tvEstado.setText(endereco.getEstado());
     }
 
     @Override
@@ -50,7 +59,7 @@ public class EnderecosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyDataSetChanged();
     }
 
-    public static class EnderecoHolder extends RecyclerView.ViewHolder {
+    static class EnderecoHolder extends RecyclerView.ViewHolder {
 
         private TextView tvCep, tvEndereco, tvBairro, tvCidade, tvEstado;
 

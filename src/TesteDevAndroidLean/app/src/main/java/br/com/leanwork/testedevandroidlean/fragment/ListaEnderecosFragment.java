@@ -15,9 +15,6 @@ import br.com.leanwork.testedevandroidlean.R;
 
 public class ListaEnderecosFragment extends Fragment {
 
-    private EnderecosAdapter enderecosAdapter;
-    private RecyclerView rvListaEnderecos;
-
     public static ListaEnderecosFragment newInstance() {
         Bundle args = new Bundle();
         ListaEnderecosFragment fragment = new ListaEnderecosFragment();
@@ -33,9 +30,11 @@ public class ListaEnderecosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvListaEnderecos = view.findViewById(R.id.rvListaEnderecos);
+        RecyclerView rvListaEnderecos = view.findViewById(R.id.rvListaEnderecos);
         rvListaEnderecos.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvListaEnderecos.setHasFixedSize(true);
+        EnderecosAdapter enderecosAdapter = new EnderecosAdapter(getContext());
+        rvListaEnderecos.setAdapter(enderecosAdapter);
     }
 
     @Override

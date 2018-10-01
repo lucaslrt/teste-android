@@ -41,6 +41,24 @@ public class PessoaDAO extends BancoGenericoDAO {
         return listaPessoas;
     }
 
+    public Pessoa getPessoa(long id){
+        Pessoa pessoa = null;
+
+        String sql = "SELECT * FROM " + BancoSQLiteHelper.PESSOA_TABLE
+                + " WHERE " + BancoSQLiteHelper.PESSOA_ID_COLUMN + " = ?";
+
+        @SuppressLint("Recycle") Cursor cursor = database.rawQuery(sql, new String[] { id + "" });
+
+        if (cursor.moveToNext()) {
+            pessoa = new Pessoa(cursor.getLong(0)
+                    ,cursor.getString(1)
+                    ,cursor.getString(2)
+                    ,cursor.getString(3)
+                    ,cursor.getString(4));
+        }
+        return pessoa;
+    }
+
     public long setPessoa(Pessoa pessoa) {
         ContentValues values = new ContentValues();
         values.put(BancoSQLiteHelper.PESSOA_NOME_COLUMN, pessoa.getNome());

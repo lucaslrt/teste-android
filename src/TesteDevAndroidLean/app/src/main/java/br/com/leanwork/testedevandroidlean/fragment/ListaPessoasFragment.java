@@ -15,9 +15,6 @@ import br.com.leanwork.testedevandroidlean.R;
 
 public class ListaPessoasFragment extends Fragment {
 
-    private PessoasAdapter pessoasAdapter;
-    private RecyclerView rvListaPessoas;
-
     public static ListaPessoasFragment newInstance() {
         Bundle args = new Bundle();
         ListaPessoasFragment fragment = new ListaPessoasFragment();
@@ -33,10 +30,10 @@ public class ListaPessoasFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvListaPessoas = view.findViewById(R.id.rvListaPessoas);
+        RecyclerView rvListaPessoas = view.findViewById(R.id.rvListaPessoas);
         rvListaPessoas.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvListaPessoas.setHasFixedSize(true);
-        pessoasAdapter = new PessoasAdapter(getContext());
+        PessoasAdapter pessoasAdapter = new PessoasAdapter(getContext());
         rvListaPessoas.setAdapter(pessoasAdapter);
     }
 

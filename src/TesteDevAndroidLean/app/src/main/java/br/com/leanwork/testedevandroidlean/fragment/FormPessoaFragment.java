@@ -3,7 +3,8 @@ package br.com.leanwork.testedevandroidlean.fragment;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.database.Cursor;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,12 +14,12 @@ import android.support.design.button.MaterialButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,7 +27,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Objects;
 
-import br.com.leanwork.testedevandroidlean.BancoSQLiteHelper;
+import br.com.leanwork.testedevandroidlean.activity.DetalheCadastroActivity;
 import br.com.leanwork.testedevandroidlean.dao.PessoaDAO;
 import br.com.leanwork.testedevandroidlean.model.Pessoa;
 import br.com.leanwork.testedevandroidlean.util.FormUtil;
@@ -71,15 +72,18 @@ public class FormPessoaFragment extends Fragment {
         etDataNascimento = view.findViewById(R.id.etDataNascimento);
         spnGenero = view.findViewById(R.id.spnGenero);
         MaterialButton mbtFinalizarCadastro = view.findViewById(R.id.btFinalizarCadastroPessoa);
+        MaterialButton mbtLimparDados = view.findViewById(R.id.btLimparCadastroPessoa);
 
         // adicionando itens para o spinner
         adicionarGeneros();
 
         // quando o campo de data for selecionado
         etDataNascimento.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-                new DatePickerFragment().show(getActivity().getSupportFragmentManager(), "datePicker");
+                new DatePickerFragment().show(Objects.requireNonNull(getActivity())
+                        .getSupportFragmentManager(), "datePicker");
             }
         });
 
@@ -105,6 +109,14 @@ public class FormPessoaFragment extends Fragment {
                 }
             }
         });
+
+        // quando o botão de limpar cadastro for clicado
+        mbtLimparDados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                limparDados();
+            }
+        });
     }
 
     @Override
@@ -123,11 +135,30 @@ public class FormPessoaFragment extends Fragment {
         spnGenero.setAdapter(spinnerAdapter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void cadastroRealizadoComSucesso(Long idNovaPessoa) {
-        limparDados();
-        PushCadastro.disparar(getContext(), "Pessoa", idNovaPessoa);
+
+        Intent notificationIntent = new Intent(getActivity(), DetalheCadastroActivity.class);
+        notificationIntent.putExtra(DetalheCadastroActivity.ExtraTipoCadastro, "Pessoa");
+        notificationIntent.putExtra(DetalheCadastroActivity.ExtraIdCadastro, idNovaPessoa);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+
+        PendingIntent contentIntent = PendingIntent.getActivity(getActivity(), 0,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat
+                .Builder(Objects.requireNonNull(getContext()), "0")
+                .setSmallIcon(R.drawable.ic_cadastro_notification)
+                .setContentTitle("Novo Cadastro de Pessoa!")
+                .setContentText(nome + "foi adicionado(a)!")
+                .setContentIntent(contentIntent);
+
+        PushCadastro.disparar(getContext(), notificationBuilder);
         ServiceUtil.esconderTeclado(getContext(), etNomeCompleto);
         Toast.makeText(getActivity(), "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show();
+
+        limparDados();
     }
 
     private void limparDados() {

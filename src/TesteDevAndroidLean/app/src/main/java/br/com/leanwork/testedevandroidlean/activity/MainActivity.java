@@ -59,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        // abrindo a lista de endereços primeiramente
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
+        fragmentTransaction
+                .replace(R.id.framePrincipal, new ListaEnderecosFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
 }
